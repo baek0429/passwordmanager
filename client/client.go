@@ -10,13 +10,16 @@ type EncryptedPassword struct {
 	value string
 }
 
-func (encrypted *EncryptedPassword) SimpleDecrypt() (*DecryptedPassword, error) {
+func (encrypted *EncryptedPassword) SimpleDecrypt() *DecryptedPassword {
 	b, err := base64.StdEncoding.DecodeString(encrypted.value)
+	if err != nil {
+		// fmt.Println(err)
+	}
 	var decrypted DecryptedPassword
 	str := string(b[:])
 	decrypted.Key = encrypted.key
 	decrypted.Value = string(str)
-	return &decrypted, err
+	return &decrypted
 }
 
 type DecryptedPassword struct {
