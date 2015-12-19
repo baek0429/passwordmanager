@@ -6,12 +6,12 @@ import (
 
 func TestEncoding(t *testing.T) {
 	decrypted := &DecryptedPassword{
-		key:   "hello",
-		value: "world",
+		Key:   "hello",
+		Value: "world",
 	}
 	encrypted := decrypted.SimpleEncrypt()
 	t.Log(encrypted)
 
-	debyte, _ := encrypted.SimpleDecrypt()
+	debyte := encrypted.SimpleDecrypt()
 	t.Log(debyte)
 }
