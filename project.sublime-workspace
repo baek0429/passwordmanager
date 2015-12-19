@@ -371,6 +371,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "client/command.go",
+			"settings":
+			{
+				"buffer_size": 2278,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ENCRYPTED",
+			"settings":
+			{
+				"buffer_size": 23,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -511,16 +527,16 @@
 	"expanded_folders":
 	[
 		"/C/Users/BAEK/Desktop/passwordmanager",
-		"/C/Users/BAEK/Desktop/passwordmanager/client",
-		"/C/Users/BAEK/Desktop/passwordmanager/server/encrypted"
+		"/C/Users/BAEK/Desktop/passwordmanager/client"
 	],
 	"file_history":
 	[
+		"/C/Users/BAEK/Desktop/passwordmanager/client/ENCRYPTED",
+		"/C/Users/BAEK/Desktop/passwordmanager/.git/COMMIT_EDITMSG",
 		"/C/Users/BAEK/Desktop/passwordmanager/client/command.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/client/client.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/client/command_test.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/ENCRYPTED",
-		"/C/Users/BAEK/Desktop/passwordmanager/client/ENCRYPTED",
 		"/C/Users/BAEK/Desktop/passwordmanager/client/client_test.go",
 		"/C/Go/src/sort/sort.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/client/main.go",
@@ -642,8 +658,7 @@
 		"/C/Console2/android_proto/android_proto/.git/packed-refs",
 		"/C/Console2/android_proto/android_proto/.git/config",
 		"/C/Console2/android_proto/android_proto/.git/description",
-		"/C/Console2/android_proto/android_proto/.git/index",
-		"/C/Console2/android_proto/android_proto/.git/COMMIT_EDITMSG"
+		"/C/Console2/android_proto/android_proto/.git/index"
 	],
 	"find":
 	{
@@ -806,8 +821,66 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "client/command.go",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								715,
+								715
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1008.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ENCRYPTED",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

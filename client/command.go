@@ -38,11 +38,11 @@ func intialize(strs []string) {
 }
 
 func (c *Command) run() {
-	f, err := os.OpenFile(FILENAME, os.O_APPEND, 0600)
+	f, err := os.OpenFile(FILENAME, os.O_APPEND, 0600) // open file
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
+	defer f.Close() // defer close
 	action := c.Type
 	switch action {
 	// 0			1		2		3	  4
