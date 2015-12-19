@@ -4,10 +4,14 @@ import (
 	"testing"
 )
 
-func TestNode(t *testing.T) {
-	c := &CommandNode{}
-	d := &CommandNode{}
-	c.AddCommandNode(d, 0)
-	c.AddCommandNode(d, 1)
-	c.AddCommandNode(d, 2)
+func _TestNodeBasic(t *testing.T) {
+	t.Log(parseCommands([]string{"", "create"}))
+	t.Log(parseCommands([]string{"", "create1"}))
+	t.Log(parseCommands([]string{"", "create", "hello", "-h"}))
+	t.Log(parseCommands([]string{"", "create", "hello", "world", "-h"}))
+}
+
+func TestRun(t *testing.T) {
+	c := parseCommands([]string{"", "create", "naver", "baek0429", "baek12345"})
+	c.run()
 }

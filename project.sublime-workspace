@@ -4,16 +4,100 @@
 		"selected_items":
 		[
 			[
+				"r",
+				"Read	n int, err error ƒ"
+			],
+			[
+				"o",
+				"O_APPEND	 Ɩ"
+			],
+			[
+				"Open",
+				"OpenFile	file *os.File, err error ƒ"
+			],
+			[
+				"C_",
+				"C_SHOW	 Ɩ"
+			],
+			[
+				"typ",
+				"Type	int ν"
+			],
+			[
+				"Logf",
+				"Logf	 ƒ"
+			],
+			[
+				"NT_",
+				"NT_COMMAND	 Ɩ"
+			],
+			[
+				"Node",
+				"NextNode	*Node ν"
+			],
+			[
+				"AT_",
+				"AT_CREATE	 Ɩ"
+			],
+			[
+				"C",
+				"NT_COMMAND	 Ɩ"
+			],
+			[
+				"add",
+				"addFlag	 ƒ"
+			],
+			[
+				"NT",
+				"NT_FLAG	 Ɩ"
+			],
+			[
+				"N",
+				"NT_ARGUMENT	 Ɩ"
+			],
+			[
+				"Co",
+				"commandType	int ν"
+			],
+			[
+				"c",
+				"c	*CommandNode ν"
+			],
+			[
+				"Comman",
+				"CommandNode	struct ʈ"
+			],
+			[
+				"Comm",
+				"CommandNode	struct ʈ"
+			],
+			[
+				"Command",
+				"COMMAND	 Ɩ"
+			],
+			[
+				"inti",
+				"initialize	 ƒ"
+			],
+			[
+				"File",
+				"OpenFile	file *os.File, err error ƒ"
+			],
+			[
+				"O_",
+				"O_WRONLY	 Ɩ"
+			],
+			[
+				"O",
+				"O_CREATE	 Ɩ"
+			],
+			[
 				"func",
 				"func http handler	func(rw, req) ʂ"
 			],
 			[
 				"Write",
 				"Write	nn int, err error ƒ"
-			],
-			[
-				"File",
-				"File	struct ʈ"
 			],
 			[
 				"NewWriter",
@@ -34,10 +118,6 @@
 			[
 				"Mp",
 				"Mp4File	struct ʈ"
-			],
-			[
-				"Open",
-				"Open	file *os.File, err error ƒ"
 			],
 			[
 				"file",
@@ -291,38 +371,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "main.go",
-			"settings":
-			{
-				"buffer_size": 3154,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server/password_server.go",
-			"settings":
-			{
-				"buffer_size": 1119,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "ENCRYPTED",
-			"settings":
-			{
-				"buffer_size": 15,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/client.go",
-			"settings":
-			{
-				"buffer_size": 740,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -464,11 +512,20 @@
 	[
 		"/C/Users/BAEK/Desktop/passwordmanager",
 		"/C/Users/BAEK/Desktop/passwordmanager/client",
-		"/C/Users/BAEK/Desktop/passwordmanager/server"
+		"/C/Users/BAEK/Desktop/passwordmanager/server/encrypted"
 	],
 	"file_history":
 	[
+		"/C/Users/BAEK/Desktop/passwordmanager/client/command.go",
+		"/C/Users/BAEK/Desktop/passwordmanager/client/client.go",
+		"/C/Users/BAEK/Desktop/passwordmanager/client/command_test.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/ENCRYPTED",
+		"/C/Users/BAEK/Desktop/passwordmanager/client/ENCRYPTED",
+		"/C/Users/BAEK/Desktop/passwordmanager/client/client_test.go",
+		"/C/Go/src/sort/sort.go",
+		"/C/Users/BAEK/Desktop/passwordmanager/client/main.go",
+		"/C/Users/BAEK/Desktop/passwordmanager/server/password_server.go",
+		"/C/Users/BAEK/Desktop/passwordmanager/main.go",
 		"/C/Users/BAEK/Desktop/passwordmanager/server/app.yaml",
 		"/C/Users/BAEK/Desktop/passwordmanager/server/server.go",
 		"/C/Users/BAEK/AppData/Local/go_appengine/src/github.com/goprac/practices/hash.go",
@@ -586,16 +643,7 @@
 		"/C/Console2/android_proto/android_proto/.git/config",
 		"/C/Console2/android_proto/android_proto/.git/description",
 		"/C/Console2/android_proto/android_proto/.git/index",
-		"/C/Console2/android_proto/android_proto/.git/COMMIT_EDITMSG",
-		"/C/Console2/android_proto/android_proto/.git/info/exclude",
-		"/C/Console2/android_proto/android_proto/DrawandDrag/.git/config",
-		"/C/Console2/android_proto/android_proto/.gitignore",
-		"/C/Console2/android_proto/android_proto/DrawandDrag/.git/COMMIT_EDITMSG",
-		"/C/Users/BAEK/Downloads/marioai/marioai/src/ch/idsia/scenarios/Play.java",
-		"/C/Users/BAEK/Downloads/yhack-cv-master/yhack-cv-master/handler.py",
-		"/C/Users/BAEK/Desktop/mario/mario-astar-robinbaumgarten/astar/sprites/Mario.java",
-		"/C/Users/BAEK/Desktop/mario/mario-astar-robinbaumgarten/astar/AStarSimulator.java",
-		"/C/Users/BAEK/Desktop/mario/mario-astar-robinbaumgarten/astar/LevelScene.java"
+		"/C/Console2/android_proto/android_proto/.git/COMMIT_EDITMSG"
 	],
 	"find":
 	{
@@ -613,6 +661,30 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"writestring",
+			"data",
+			"PARSEcOMMANDS",
+			"about",
+			"RUBBISH",
+			"CommandType",
+			"command",
+			"Command",
+			"COMMAND",
+			"CommandType",
+			"CommandNode",
+			"AddCommandNode",
+			"node",
+			"Type",
+			"Action",
+			"ROOT",
+			"Type",
+			"node",
+			"c",
+			"Key",
+			"Interface",
+			"haskey",
+			"fmt.",
+			"scan",
 			"Value",
 			"value",
 			"Key",
@@ -716,31 +788,7 @@
 			"relative",
 			"border",
 			"right",
-			"100px",
-			"80px",
-			"100px",
-			"test",
-			"navbar2",
-			"75px",
-			"navbar2",
-			"65",
-			"textbox",
-			"list",
-			"engineer list",
-			"h1",
-			"test",
-			"right",
-			"margin",
-			"absolute",
-			"fixed",
-			"txt",
-			"position",
-			"h5",
-			"h3",
-			"opacity",
-			">\n",
-			"dropdown",
-			"$('.dropdown-toggle').dropdown()"
+			"100px"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -758,124 +806,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "main.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3154,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								822,
-								822
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 616.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "server/password_server.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1119,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "ENCRYPTED",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								15,
-								15
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "client/client.go",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 740,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								464,
-								464
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/GoSublime/syntax/GoSublime-Go.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -1009,6 +941,10 @@
 	"output.9o://C:\\Users\\BAEK\\Desktop\\passwordmanager":
 	{
 		"height": 178.0
+	},
+	"output.9o://C:\\Users\\BAEK\\Desktop\\passwordmanager\\client":
+	{
+		"height": 264.0
 	},
 	"output.9o://C:\\Users\\BAEK\\Desktop\\passwordmanager\\server":
 	{
