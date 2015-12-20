@@ -12,7 +12,7 @@ func _TestNodeBasic(t *testing.T) {
 }
 
 func TestRun(t *testing.T) {
-	c := parseCommands([]string{"", "create", "naver1", "baek0429", "baek12345"})
+	c := parseCommands([]string{"", "create", "daum", "baek0429", "baek12345"})
 	c.run()
 }
 
