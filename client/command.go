@@ -3,8 +3,12 @@ package client
 import (
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
+	"strings"
+	"time"
 )
 
 const (
@@ -38,11 +42,6 @@ func intialize(strs []string) {
 }
 
 func (c *Command) run() {
-	f, err := os.OpenFile(FILENAME, os.O_APPEND, 0600) // open file
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close() // defer close
 	action := c.Type
 	switch action {
 	// 0			1		2		3	  4
@@ -50,17 +49,47 @@ func (c *Command) run() {
 	case 1: //create
 		if len(c.Arguments) < 3 {
 			log.Fatal(errors.New("More arguments needed!"))
+			return
 		}
+		if checkIfCompanyNameExists(c.Arguments[0]) { // check if company exists
+			fmt.Println("Company Name Exist, use replace")
+			return
+		}
+
+		var d = DecryptedPassword{ // prepare decrypted file
+			Key:   c.Arguments[1],
+			Value: c.Arguments[2],
+		}
+		var e = d.SimpleEncrypt() // encrypt
+		err := writeEncryptedDataToFile(c.Arguments[0], e)
+		if err != nil {
+			panic(err)
+		}
+
 	case 3: //delete
 		if len(c.Arguments) < 1 {
 			log.Fatal(errors.New("More arguments needed!"))
+			err := deleteLineFromCompanyName(c.Arguments[1])
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	case 2: //show
 		if len(c.Arguments) < 1 {
 			log.Fatal(errors.New("More arguments needed!"))
 		}
-		// read data from file
-		// search company
+		rows, err := readEncryptedDataFromFile() // read data from file
+		if err != nil {
+			panic(err)
+		}
+		result := searchWithCompanyName(c.Arguments[0], rows) // search company
+		if len(result) == 0 {
+			fmt.Println("none was found with that name")
+			return
+		}
+		for _, v := range result {
+			fmt.Println(v)
+		}
 		return
 	case 9:
 		fmt.Println(ABOUT_MSG, CREDIT)
@@ -69,6 +98,71 @@ func (c *Command) run() {
 		fmt.Println(ABOUT_MSG, ERR_MSG)
 	}
 	return
+}
+
+func deleteLineFromCompanyName(cname string) error {
+	input, err := ioutil.ReadFile(FILENAME)
+	if err != nil {
+		return err
+	}
+	re := regexp.MustCompile("(?m)^.*" + cname + ".*$[\r\n]+")
+	res := re.ReplaceAllString(string(input), "")
+	ioutil.WriteFile(FILENAME, []byte(res), 0666)
+	return nil
+}
+
+func searchWithCompanyName(cname string, strs []string) []string {
+	var result []string
+	for _, str := range strs {
+		eachColumn := strings.Split(str, " ")
+		if strings.Contains(eachColumn[0], cname) {
+			result = append(result, str)
+		}
+	}
+	return result
+}
+
+func searchWithKeyword(keyword string, strs []string) []string {
+	var result []string
+	for _, str := range strs {
+		if strings.Contains(str, keyword) {
+			result = append(result, str)
+		}
+	}
+	return result
+}
+
+func writeEncryptedDataToFile(company string, encrypted *EncryptedPassword) error {
+	f, err := os.OpenFile(FILENAME, os.O_CREATE|os.O_APPEND, 0600) // open file
+	if err != nil {
+		return err
+	}
+	defer f.Close() // defer close
+	str := ""
+	blank := " "
+	newline := "\n"
+	// complete the format
+	str = str + company + blank + encrypted.Key + blank + encrypted.Value + time.Now().String() + newline
+	_, err = f.Write([]byte(str))
+	return err
+}
+
+func checkIfCompanyNameExists(str string) bool {
+	data, err := ioutil.ReadFile(FILENAME)
+	if err != nil {
+		return false
+	}
+	re := regexp.MustCompile("(?m)^.*" + str + ".*$[\r\n]+")
+	return re.Match(data)
+}
+
+func readEncryptedDataFromFile() ([]string, error) {
+	data, err := ioutil.ReadFile(FILENAME)
+	if err != nil {
+		return nil, err
+	}
+	eachRow := strings.Split(string(data), "\n")
+	return eachRow, nil
 }
 
 func parseCommands(strs []string) *Command {
