@@ -11,9 +11,18 @@ func _TestNodeBasic(t *testing.T) {
 	t.Log(parseCommands([]string{"", "create", "hello", "world", "-h"}))
 }
 
-func TestRun(t *testing.T) {
+func _TestRun(t *testing.T) {
 	c := parseCommands([]string{"", "create", "daum1", "baek0429", "baek12345"})
-	c.run()
+	c.Run()
+}
+
+func _TestLastPushDate(t *testing.T) {
+	lastPushDateUpdateNow()
+	ti, err := getLastPushDate()
+	if err != nil {
+		t.Log(err)
+	}
+	t.Log(ti.String())
 }
 
 func _TestCheckingCName(t *testing.T) {

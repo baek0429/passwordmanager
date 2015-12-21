@@ -12,7 +12,8 @@ import (
 )
 
 const (
-	FILENAME = "ENCRYPTED"
+	FILENAME       = "ENCRYPTED"
+	LAST_PUSH_DATE = "LAST_PUSH"
 
 	C_CREATE = 1
 	C_SHOW   = 2
@@ -36,18 +37,15 @@ type Command struct {
 	Flags       []string
 }
 
-func intialize(strs []string) {
-	c := parseCommands(strs)
-	c.run()
-}
-
-func (c *Command) run() {
+// entry point of command.go
+// note that it has *Command pointer receiver
+func (c *Command) Run() {
 	action := c.Type
 	switch action {
 	// 0			1		2		3	  4
 	// [path.exe] [command] [arg1] [arg2] [arg3]
 	case 1: //create
-		if len(c.Arguments) < 3 {
+		if len(c.Arguments) < 3 { // check the number of arguments
 			log.Fatal(errors.New("More arguments needed!"))
 			return
 		}
@@ -67,15 +65,19 @@ func (c *Command) run() {
 		}
 
 	case 3: //delete
-		if len(c.Arguments) < 1 {
+		if len(c.Arguments) < 1 { // check the number of arguments
 			log.Fatal(errors.New("More arguments needed!"))
-			err := deleteLineFromCompanyName(c.Arguments[1])
+			if !checkIfCompanyNameExists(c.Arguments[1]) { // search by company name
+				fmt.Println("Check your company name again")
+				return
+			}
+			err := deleteLineFromCompanyName(c.Arguments[1]) // delete line by company name
 			if err != nil {
-				log.Fatal(err)
+				panic(err)
 			}
 		}
 	case 2: //show
-		if len(c.Arguments) < 1 {
+		if len(c.Arguments) < 1 { // argument check
 			log.Fatal(errors.New("More arguments needed!"))
 		}
 		rows, err := readEncryptedDataFromFile() // read data from file
@@ -91,6 +93,8 @@ func (c *Command) run() {
 			fmt.Println(v)
 		}
 		return
+	case 4:
+		push()
 	case 9:
 		fmt.Println(ABOUT_MSG, CREDIT)
 		return
@@ -100,6 +104,54 @@ func (c *Command) run() {
 	return
 }
 
+// TODO: checkIfPushNeeded
+func push() {
+	if checkIfPushNeeded() {
+		uploadToServer()
+	}
+}
+
+// TODO: upload ENCRYPTED
+func uploadToServer() {
+
+}
+
+func checkIfPushNeeded() bool {
+	lastPushDate, err := getLastPushDate()
+	if err != nil {
+		panic(err)
+	}
+	modeTime := os.Stat(FILENAME).ModTime()
+	return !lastPushDate.After(modeTime)
+}
+
+func lastPushDateUpdateNow() error {
+	f, err := os.OpenFile(LAST_PUSH_DATE, os.O_CREATE, 0666)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	b, err := time.Now().MarshalBinary()
+	if err != nil {
+		return err
+	}
+	f.Write(b)
+	return nil
+}
+
+func getLastPushDate() (*time.Time, error) {
+	b, err := ioutil.ReadFile(LAST_PUSH_DATE)
+	if err != nil {
+		return new(time.Time), err
+	}
+	var ti time.Time
+	err = ti.UnmarshalBinary(b)
+	if err != nil {
+		return new(time.Time), err
+	}
+	return &ti, nil
+}
+
 func deleteLineFromCompanyName(cname string) error {
 	input, err := ioutil.ReadFile(FILENAME)
 	if err != nil {
@@ -107,7 +159,10 @@ func deleteLineFromCompanyName(cname string) error {
 	}
 	re := regexp.MustCompile("(?m)^.*" + cname + ".*$[\r\n]+")
 	res := re.ReplaceAllString(string(input), "")
-	ioutil.WriteFile(FILENAME, []byte(res), 0666)
+	err = ioutil.WriteFile(FILENAME, []byte(res), 0666)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
