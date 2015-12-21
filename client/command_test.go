@@ -5,14 +5,14 @@ import (
 )
 
 func _TestNodeBasic(t *testing.T) {
-	t.Log(parseCommands([]string{"", "create"}))
-	t.Log(parseCommands([]string{"", "create1"}))
-	t.Log(parseCommands([]string{"", "create", "hello", "-h"}))
-	t.Log(parseCommands([]string{"", "create", "hello", "world", "-h"}))
+	t.Log(ParseCommands([]string{"", "create"}))
+	t.Log(ParseCommands([]string{"", "create1"}))
+	t.Log(ParseCommands([]string{"", "create", "hello", "-h"}))
+	t.Log(ParseCommands([]string{"", "create", "hello", "world", "-h"}))
 }
 
 func _TestRun(t *testing.T) {
-	c := parseCommands([]string{"", "create", "daum1", "baek0429", "baek12345"})
+	c := ParseCommands([]string{"", "create", "daum1", "baek0429", "baek12345"})
 	c.Run()
 }
 

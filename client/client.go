@@ -39,3 +39,7 @@ func (notyet *DecryptedPassword) SimpleEncrypt() *EncryptedPassword {
 	encrypted.Value = string(b)
 	return &encrypted
 }
+
+func (notyet *DecryptedPassword) String() string {
+	return notyet.Key + " " + notyet.Value
+}

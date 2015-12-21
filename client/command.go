@@ -25,9 +25,10 @@ const (
 	C_DELETE_IST = ""
 	C_ABOUT_IST  = ""
 
-	ERR_MSG   = "Error, check your command by printing '[command] [-h]'"
-	ABOUT_MSG = ""
-	CREDIT    = "Copyright 2015 Chungseok Baek csbaek0429@gmail.com"
+	ERR_MSG      = "Error, check your command by printing '[command] [-h]'"
+	COMMAND_LIST = "create, delete, show"
+	ABOUT_MSG    = "This program safely stores your passwords."
+	CREDIT       = "Copyright 2015 Chungseok Baek csbaek0429@gmail.com"
 )
 
 type Command struct {
@@ -90,7 +91,13 @@ func (c *Command) Run() {
 			return
 		}
 		for _, v := range result {
-			fmt.Println(v)
+			eachColumn := strings.Split(v, " ")
+			encrypted := &EncryptedPassword{
+				Key:   eachColumn[1],
+				Value: eachColumn[2],
+			}
+			decrypted := encrypted.SimpleDecrypt()
+			fmt.Println(eachColumn[0], decrypted.String())
 		}
 		return
 	case 4:
@@ -99,7 +106,7 @@ func (c *Command) Run() {
 		fmt.Println(ABOUT_MSG, CREDIT)
 		return
 	default:
-		fmt.Println(ABOUT_MSG, ERR_MSG)
+		fmt.Println(ABOUT_MSG, ERR_MSG, COMMAND_LIST)
 	}
 	return
 }
@@ -121,7 +128,11 @@ func checkIfPushNeeded() bool {
 	if err != nil {
 		panic(err)
 	}
-	modeTime := os.Stat(FILENAME).ModTime()
+	ti, err := os.Stat(FILENAME)
+	if err != nil {
+		panic(err)
+	}
+	modeTime := ti.ModTime()
 	return !lastPushDate.After(modeTime)
 }
 
@@ -220,7 +231,7 @@ func readEncryptedDataFromFile() ([]string, error) {
 	return eachRow, nil
 }
 
-func parseCommands(strs []string) *Command {
+func ParseCommands(strs []string) *Command {
 	// prepare empty command
 	c := &Command{}
 
@@ -247,7 +258,6 @@ func parseCommands(strs []string) *Command {
 		c.Type = C_ABOUT
 		c.Instruction = C_ABOUT_IST
 	default:
-		fmt.Println(ERR_MSG)
 		return c
 	}
 
