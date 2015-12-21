@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
@@ -44,6 +45,8 @@ type Command struct {
 	Flags       []string
 }
 
+var p string
+
 // entry point of command.go
 // note that it has *Command pointer receiver
 func (c *Command) Run() {
@@ -51,6 +54,8 @@ func (c *Command) Run() {
 	if !c.flagProcess() { // flag process returns true if it needs to proceed the following action
 		return
 	}
+	p, _ = filepath.Abs(filepath.Dir(os.Args[0]) + "/" + FILENAME) // assiging Absolute file path, it is ugly my mistake..
+	log.Println(p)
 	switch action {
 	// 0			1		2		3	  4
 	// [path.exe] [command] [arg1] [arg2] [arg3]
@@ -127,7 +132,7 @@ func replace(c *Command) { // the worst case is 'delete' succeeds and 'create' f
 
 func show(c *Command) {
 	if len(c.Arguments) < 1 { // argument check
-		b, err := ioutil.ReadFile(FILENAME)
+		b, err := ioutil.ReadFile(p)
 		if err != nil {
 			fmt.Println(err)
 		}
@@ -224,7 +229,7 @@ func checkIfPushNeeded() bool {
 	if err != nil {
 		panic(err)
 	}
-	ti, err := os.Stat(FILENAME)
+	ti, err := os.Stat(p)
 	if err != nil {
 		panic(err)
 	}
@@ -260,13 +265,13 @@ func getLastPushDate() (*time.Time, error) {
 }
 
 func deleteLineFromCompanyName(cname string) error {
-	input, err := ioutil.ReadFile(FILENAME)
+	input, err := ioutil.ReadFile(p)
 	if err != nil {
 		return err
 	}
-	re := regexp.MustCompile("(?m)^.*" + cname + "\t\n\v\f\r.*$[\r\n]+")
+	re := regexp.MustCompile("(?m)^.*" + cname + "[[:blank:]].*$[\r\n]+")
 	res := re.ReplaceAllString(string(input), "")
-	err = ioutil.WriteFile(FILENAME, []byte(res), 0666)
+	err = ioutil.WriteFile(p, []byte(res), 0666)
 	if err != nil {
 		return err
 	}
@@ -295,7 +300,7 @@ func searchWithKeyword(keyword string, strs []string) []string {
 }
 
 func writeEncryptedDataToFile(company string, encrypted *EncryptedPassword) error {
-	f, err := os.OpenFile(FILENAME, os.O_CREATE|os.O_APPEND, 0600) // open file
+	f, err := os.OpenFile(p, os.O_CREATE|os.O_APPEND, 0600) // open file
 	if err != nil {
 		return err
 	}
@@ -310,16 +315,16 @@ func writeEncryptedDataToFile(company string, encrypted *EncryptedPassword) erro
 }
 
 func checkIfCompanyNameExists(str string) bool {
-	data, err := ioutil.ReadFile(FILENAME)
+	data, err := ioutil.ReadFile(p)
 	if err != nil {
 		return false
 	}
-	re := regexp.MustCompile("(?m)^.*" + str + "\t\n\v\f\r.*$[\r\n]+")
+	re := regexp.MustCompile("(?m)^.*" + str + "[[:blank:]].*$[\r\n]+")
 	return re.Match(data)
 }
 
 func readEncryptedDataFromFile() ([]string, error) {
-	data, err := ioutil.ReadFile(FILENAME)
+	data, err := ioutil.ReadFile(p)
 	if err != nil {
 		return nil, err
 	}

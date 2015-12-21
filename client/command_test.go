@@ -4,6 +4,13 @@ import (
 	"testing"
 )
 
+func TestCheck(t *testing.T) {
+	c := ParseCommands([]string{"", "create", "daum1", "baek0429", "baek12345"})
+	c.Run()
+	t.Log(checkIfCompanyNameExists("daum1"))
+	t.Log(checkIfCompanyNameExists("da"))
+}
+
 func _TestNodeBasic(t *testing.T) {
 	t.Log(ParseCommands([]string{"", "create"}))
 	t.Log(ParseCommands([]string{"", "create1"}))
