@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"strings"
 	"time"
+	"github.com/kardianos/osext"
 )
 
 const (
@@ -54,7 +55,8 @@ func (c *Command) Run() {
 	if !c.flagProcess() { // flag process returns true if it needs to proceed the following action
 		return
 	}
-	p, _ = filepath.Abs(filepath.Dir(os.Args[0]) + "/" + FILENAME) // assiging Absolute file path, it is ugly my mistake..
+	filename, _ := osext.Executable()
+	p, _ = filepath.Abs(filename + "/../" + FILENAME) // assiging Absolute file path, it is ugly my mistake..
 	log.Println(p)
 	switch action {
 	// 0			1		2		3	  4
