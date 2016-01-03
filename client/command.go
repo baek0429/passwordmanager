@@ -238,7 +238,7 @@ func checkIfPushNeeded() bool {
 }
 
 func lastPushDateUpdateNow() error {
-	f, err := os.OpenFile(LAST_PUSH_DATE, os.O_CREATE, 0666)
+	f, err := os.OpenFile(LAST_PUSH_DATE, os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
 		return err
 	}
@@ -300,7 +300,7 @@ func searchWithKeyword(keyword string, strs []string) []string {
 }
 
 func writeEncryptedDataToFile(company string, encrypted *EncryptedPassword) error {
-	f, err := os.OpenFile(p, os.O_CREATE|os.O_APPEND, 0600) // open file
+	f, err := os.OpenFile(p, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0600) // open file
 	if err != nil {
 		return err
 	}
